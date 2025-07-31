@@ -11,10 +11,10 @@ const hotspotMaterial = new THREE.MeshBasicMaterial({
 });
 
 const highlightMaterial = new THREE.MeshBasicMaterial({
-  color: 0xffff00,
+  color: 0x808080,
   transparent: true,
-  opacity: 0.3,
-  visible: false,
+  opacity: 0.7,
+  visible: true,
 });
 
 // Create hotspot and highlight for a part

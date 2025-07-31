@@ -11,22 +11,7 @@ let lastHovered = null;
 
 // Part click handlers
 function handlePartClick(partName) {
-  switch (partName) {
-    case 'side_door':
-      console.log('Side Door hotspot clicked!');
-      // Add your door logic here
-      break;
-    case 'front_left_wheel':
-      console.log('Front Left Wheel hotspot clicked!');
-      // Add your wheel logic here
-      break;
-    case 'front_right_wheel':
-      console.log('Front Right Wheel hotspot clicked!');
-      // Add your wheel logic here
-      break;
-    default:
-      console.log(`Clicked on: ${partName}`);
-  }
+  console.log(`Clicked on: ${partName}`);
 }
 
 // Setup click handler
