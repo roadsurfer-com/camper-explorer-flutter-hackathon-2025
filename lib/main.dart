@@ -51,23 +51,23 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _resetCamera() {
-    controller.setCameraTarget(0, 0, 0);
-    controller.setCameraOrbit(45, 80, 120);
+    controller.setCameraTarget(0, 1.5, 0);
+    controller.setCameraOrbit(45, 65, 80);
   }
 
   void _focusFeature(String feature) {
     switch (feature) {
       case 'Bike rack':
-        controller.setCameraTarget(0, 1, -2);
-        controller.setCameraOrbit(45, 80, 40);
+        controller.setCameraTarget(0, 1.5, 0);
+        controller.setCameraOrbit(180, 70, 60);
         break;
       case 'Water':
         controller.setCameraTarget(0, 1.5, 1);
-        controller.setCameraOrbit(120, 75, 40);
+        controller.setCameraOrbit(220, 70, 40);
         break;
       case 'Roof tent':
-        controller.setCameraTarget(0, 3, 0);
-        controller.setCameraOrbit(0, 70, 40);
+        controller.setCameraTarget(0, 1, 0);
+        controller.setCameraOrbit(0, 0, 80);
         break;
     }
   }
@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               // TOP: Horizontal ListView with icons
               Padding(
-                padding: const EdgeInsets.only(top: 20.0),
+                padding: const EdgeInsets.only(top: 10.0),
                 child: SizedBox(
                   height: 120,
                   child: ListView(
@@ -138,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
               // BOTTOM: Curved slider for manual rotation
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 child: SleekCircularSlider(
                   initialValue: _sliderValue,
                   min: 0,
@@ -146,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   appearance: CircularSliderAppearance(
                     angleRange: 180,
                     startAngle: 180,
-                    size: 200,
+                    size: 100,
                     customWidths: CustomSliderWidths(
                       trackWidth: 2,
                       progressBarWidth: 4,
