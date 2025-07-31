@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Camper 3D Viewer',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
       ),
       home: const MyHomePage(title: 'Discover your camper'),
       debugShowCheckedModeBanner: false,
@@ -84,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
         controller.setCameraTarget(0, 1.5, 1);
         controller.setCameraOrbit(220, 70, 40);
         break;
-      case 'Roof tent':
+      case 'Rooftop bed':
         controller.setCameraTarget(0, 1, 0);
         controller.setCameraOrbit(0, 0, 80);
         break;
@@ -241,7 +241,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _focusFeature(feature.title);
         }
       });
-      _openFeatureDetails(feature); // now passing the whole object
+      // _openFeatureDetails(feature); // now passing the whole object
     },
     child: Container(
       width: 150,
