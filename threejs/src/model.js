@@ -58,12 +58,16 @@ export function loadModel() {
       scene.add(van);
 
       // Create interactive parts
-      //   const doorGeo = new THREE.BoxGeometry(1.5, 2, 0.5);
-      //   createInteractivePart(
-      //     doorGeo,
-      //     new THREE.Vector3(-0.4, 1.2, 1.4),
-      //     'side_door'
-      //   );
+      const doorGeo = new THREE.BoxGeometry(0.2, 1.4, 1.1);
+      createInteractivePart(
+        doorGeo,
+        new THREE.Vector3(-0.8, 1.1, 0.15),
+        'side_door'
+      );
+
+      // Create interactive parts
+      const trunkGeo = new THREE.BoxGeometry(1.5, 1.2, 0.4);
+      createInteractivePart(trunkGeo, new THREE.Vector3(0, 1.1, -1.9), 'trunk');
 
       // Create wheel geometry and rotate it to stand upright
       const wheelGeo = new THREE.CylinderGeometry(0.3, 0.3, 0.3, 32);
