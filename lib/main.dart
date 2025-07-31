@@ -33,13 +33,32 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+class Feature {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final String imageAsset;
+
+  const Feature(this.icon, this.title, this.subtitle,this.imageAsset);
+}
+
+final List<Feature> features = [
+  Feature(Icons.directions_bike, 'Bike rack', 'Secure your bike by placing the front wheel into the designated slot and locking it with your personal lock. Make sure the bike is stable and properly positioned to prevent tipping or theft.','assets/images/bikerack.png'),
+  Feature(Icons.water_drop, 'Water', 'To turn on the water supply, locate the main valve and rotate it clockwise to shut off or counterclockwise to open the flow. Ensure all taps are closed before turning the supply back on to avoid sudden pressure surges.','assets/images/water.png'),
+  Feature(Icons.roofing, 'Rooftop bed', 'The rooftop bed can easily be opened using your camper control panel. Keep in mind that at least one window must be opened during opening and closing to avoid damage from overpressure or underpressure.','assets/images/rooftop.png'),
+];
+
+
 class _MyHomePageState extends State<MyHomePage> {
   final Flutter3DController controller = Flutter3DController();
   final String srcGlb = 'assets/campervan.glb';
   double _sliderValue = 0;
 
-  String? _selectedFeature;
-  final String _defaultFeature = 'none';
+  Feature? _selectedFeature;
+  final Feature _defaultFeature = Feature(Icons.help, 'none', '', '');
+
+  //String? _selectedFeature;
+  //final String _defaultFeature = 'none';
 
   @override
   void initState() {
@@ -94,23 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    children: [
-                      _buildFeatureCard(
-                        Icons.directions_bike,
-                        'Bike rack',
-                        'Everyone’s asking about it.',
-                      ),
-                      _buildFeatureCard(
-                        Icons.water_drop,
-                        'Water',
-                        'Everyone’s asking about it.',
-                      ),
-                      _buildFeatureCard(
-                        Icons.roofing,
-                        'Roof tent',
-                        'Everyone’s asking about it.',
-                      ),
-                    ],
+                    children: features.map(_buildFeatureCard).toList(),
                   ),
                 ),
               ),
@@ -171,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
 
           // Floating label for selected feature
-          if (_selectedFeature != null && _selectedFeature != _defaultFeature)
+         if (_selectedFeature != null && _selectedFeature!.title != _defaultFeature.title)
             Positioned(
               top: 130,
               right: 16,
@@ -193,7 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Colors.deepPurple,
                 ),
                 label: Text(
-                  _selectedFeature!,
+                  _selectedFeature!.title,
                   style: const TextStyle(
                     color: Colors.deepPurple,
                     fontWeight: FontWeight.bold,
@@ -213,47 +216,53 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void _openFeatureDetails(String feature) {
+  void _openFeatureDetails(Feature feature) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => FeatureDetailPage(feature: feature),
+        builder: (context) => FeatureDetailPage(
+          feature: feature.title,
+          imageAsset: feature.imageAsset,
+          subtitle: feature.subtitle,
+        ),
       ),
     );
   }
 
   // Card builder
-  Widget _buildFeatureCard(IconData icon, String title, String subtitle) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          if (_selectedFeature == title) {
-            _selectedFeature = _defaultFeature;
-            _resetCamera();
-          } else {
-            _selectedFeature = title;
-            _focusFeature(title);
-          }
-        });
-      },
-      child: Container(
-        width: 150,
-        margin: const EdgeInsets.only(right: 12),
-        decoration: BoxDecoration(
-          color: Colors.blue.shade50,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(icon, size: 24, color: Colors.black87),
-            const SizedBox(height: 8),
-            Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 4),
-            Text(subtitle, style: const TextStyle(fontSize: 12)),
-          ],
-        ),
+  Widget _buildFeatureCard(Feature feature) {
+  return GestureDetector(
+    onTap: () {
+      setState(() {
+        if (_selectedFeature == feature) {
+          _selectedFeature = _defaultFeature;
+          _resetCamera();
+        } else {
+          _selectedFeature = feature;
+          _focusFeature(feature.title);
+        }
+      });
+      _openFeatureDetails(feature); // now passing the whole object
+    },
+    child: Container(
+      width: 150,
+      margin: const EdgeInsets.only(right: 12),
+      decoration: BoxDecoration(
+        color: Colors.blue.shade50,
+        borderRadius: BorderRadius.circular(12),
       ),
-    );
-  }
+      padding: const EdgeInsets.all(12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(feature.icon, size: 24, color: Colors.black87),
+          const SizedBox(height: 8),
+          Text(feature.title, style: const TextStyle(fontWeight: FontWeight.bold)),
+          const SizedBox(height: 4),
+          //Text(feature.subtitle, style: const TextStyle(fontSize: 12)),
+        ],
+      ),
+    ),
+  );
+}
+
 }
