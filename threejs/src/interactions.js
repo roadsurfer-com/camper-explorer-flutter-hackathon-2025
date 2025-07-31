@@ -43,23 +43,39 @@ export function setupHoverHandler() {
       const currentlyHovered = intersects[0].object;
 
       if (lastHovered !== currentlyHovered) {
-        // Hide previous highlight
+        // Hide previous highlight and icon
         if (lastHovered && lastHovered.userData.highlightMesh) {
           lastHovered.userData.highlightMesh.visible = false;
         }
+        if (lastHovered && lastHovered.userData.eyeIcon) {
+          lastHovered.userData.eyeIcon.visible = false;
+        }
 
-        // Show new highlight
+        // Show new highlight and icon
         if (currentlyHovered.userData.highlightMesh) {
           currentlyHovered.userData.highlightMesh.visible = true;
         }
+        if (currentlyHovered.userData.eyeIcon) {
+          currentlyHovered.userData.eyeIcon.visible = true;
+        }
+
+        // Change cursor to pointer when hovering over interactable object
+        document.body.style.cursor = 'pointer';
 
         lastHovered = currentlyHovered;
       }
     } else {
-      // Hide last highlight when not hovering over any object
+      // Hide last highlight and icon when not hovering over any object
       if (lastHovered && lastHovered.userData.highlightMesh) {
         lastHovered.userData.highlightMesh.visible = false;
       }
+      if (lastHovered && lastHovered.userData.eyeIcon) {
+        lastHovered.userData.eyeIcon.visible = false;
+      }
+
+      // Reset cursor to default when not hovering over any object
+      document.body.style.cursor = 'default';
+
       lastHovered = null;
     }
   });
