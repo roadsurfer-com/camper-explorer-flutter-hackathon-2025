@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _resetCamera() {
     controller.setCameraTarget(0, 1.5, 0);
-    controller.setCameraOrbit(45, 65, 80);
+    controller.setCameraOrbit(45, 65, 120);
   }
 
   void _focusFeature(String feature) {
@@ -146,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   appearance: CircularSliderAppearance(
                     angleRange: 180,
                     startAngle: 180,
-                    size: 100,
+                    size: 200,
                     customWidths: CustomSliderWidths(
                       trackWidth: 2,
                       progressBarWidth: 4,
