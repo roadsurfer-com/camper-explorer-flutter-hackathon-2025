@@ -11,9 +11,9 @@ const hotspotMaterial = new THREE.MeshBasicMaterial({
 });
 
 const highlightMaterial = new THREE.MeshBasicMaterial({
-  color: 0x808080,
+  color: 0xff00ff,
   transparent: true,
-  opacity: 0.7,
+  opacity: 0.3,
   visible: true,
 });
 
@@ -31,6 +31,7 @@ function createInteractivePart(geometry, position, name) {
   highlight.position.copy(position);
   hotspot.userData.highlightMesh = highlight;
   scene.add(highlight);
+  hotspot.userData.highlightMesh.visible = false;
 
   return { hotspot, highlight };
 }
@@ -66,7 +67,7 @@ export function loadModel() {
       );
 
       // Create interactive parts
-      const trunkGeo = new THREE.BoxGeometry(1.5, 1.2, 0.4);
+      const trunkGeo = new THREE.BoxGeometry(1.5, 1.2, 0.6);
       createInteractivePart(trunkGeo, new THREE.Vector3(0, 1.1, -1.9), 'trunk');
 
       // Create wheel geometry and rotate it to stand upright
